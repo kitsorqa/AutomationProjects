@@ -9,3 +9,13 @@ from ..base.base_class import Base
 class Main_page(Base):
     def __init__(self, driver):
         super().__init__(driver)
+
+
+    #Locators at main page
+    enter_button = "//span[contains(text(), 'Войти')]"
+    login_field = "//input[@id='USER_LOGIN_POPUP']"
+    password_field = "//input[@id='USER_PASSWORD_POPUP']"
+    enter_modal_form = "//input[@name='Login']"
+    remember_user = "//label[@for='USER_REMEMBER_frm']"
+    login_alert = "//div[@class='notice__inner']"
+    catalog_button = "//a[@class='dropdown-toggle' and @href='/catalog/']"

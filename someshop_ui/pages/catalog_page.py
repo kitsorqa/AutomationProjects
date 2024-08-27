@@ -9,3 +9,6 @@ from ..base.base_class import Base
 class Calatog_page(Base):
     def __init__(self, driver):
         super().__init__(driver)
+
+    #Locators at catalog page
+    for_dogs = "//a[contains(@href, 'lakomstva') and @class='dark_link']"

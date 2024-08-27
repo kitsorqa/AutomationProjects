@@ -1,6 +1,8 @@
 class Base:
     def __init__(self, driver):
         self.driver = driver
+        self.mail = "Faker.faker@mail.ru"
+        self.password = "fakerfaker"
 
     def get_current_url(self):
         get_url = self.driver.current_url
@@ -16,3 +18,7 @@ class Base:
 
     def assert_is_selected(self, locator, result):
         assert locator == result
+
+    def scroll_browser(self, x=0, y=0):
+        self.x = x
+        self.y = y
