@@ -19,3 +19,28 @@ class Main_page(Base):
     remember_user = "//label[@for='USER_REMEMBER_frm']"
     login_alert = "//div[@class='notice__inner']"
     catalog_button = "//a[@class='dropdown-toggle' and @href='/catalog/']"
+    cart_button = "//a[@data-entity='basket-items-count']"
+
+    def get_enter_button(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.enter_button))
+
+    def get_login_field(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.login_field))
+
+    def get_password_field(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.password_field))
+
+    def get_enter_modal_form(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.enter_modal_form))
+
+    def get_remember_user(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.remember_user))
+
+    def get_alert_login(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.login_alert))
+
+    def get_catalog_button(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.catalog_button))
+
+    def get_cart_button(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.cart_button))

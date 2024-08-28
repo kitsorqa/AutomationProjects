@@ -12,3 +12,7 @@ class Calatog_page(Base):
 
     #Locators at catalog page
     for_dogs = "//a[contains(@href, 'lakomstva') and @class='dark_link']"
+
+
+    def get_for_dogs(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.for_dogs))
