@@ -44,3 +44,25 @@ class Main_page(Base):
 
     def get_cart_button(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.cart_button))
+
+
+    def click_login_button(self):
+        self.get_enter_button().click()
+
+    def input_login(self):
+        self.get_login_field().click()
+
+    def input_password(self):
+        self.get_password_field().click()
+
+    def press_login_button(self):
+        self.get_enter_modal_form().click()
+
+    def press_remember_user(self):
+        self.get_remember_user().click()
+
+    def check_login_alert(self):
+        return self.get_alert_login().is_enabled()
+
+    def press_catalog_button(self):
+        self.get_catalog_button().click()

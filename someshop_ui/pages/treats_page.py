@@ -27,3 +27,51 @@ class Treats_page(Base):
     japan_country = "//span[contains(text(), 'Японий')]"
     show_button = "//input[@id='set_filter']"
     sausages_img = "//img[@title='Колбаски']"
+
+    def get_min_price_filter(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.min_price_filter))
+
+    def get_max_price_filter(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.max_price_filter))
+
+    def get_feed_line(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.feed_line))
+
+    def get_age_of_dogs(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.age_of_dogs))
+
+    def get_size_of_dog(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.size_of_dog))
+
+    def get_filter_breeds(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.filter_breeds))
+
+    def get_filter_ages(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.filter_ages))
+
+    def get_premium_feed(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.premium_feed))
+
+    def get_super_premium_feed(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.super_premium_feed))
+
+    def get_country_filter(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.country_filter))
+
+    def get_canada_country(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.canada_country))
+
+    def get_china_country(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.china_country))
+
+    def get_russia_country(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.russia_country))
+
+    def get_japan_country(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.japan_country))
+
+    def get_show_button(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.show_button))
+
+    def get_sausages_img(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.sausages_img))
