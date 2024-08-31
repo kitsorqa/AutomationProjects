@@ -83,3 +83,61 @@ class Cart_page(Base):
 
     def get_clear_button(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.clear_button))
+
+
+    def press_items_cart(self):
+        self.get_items_cart().click()
+
+    def press_coupon_field(self):
+        self.get_coupon_field().click()
+
+    def input_coupon_text(self, text):
+        self.get_coupon_text().send_keys(text)
+
+    def press_checkout_button(self):
+        self.get_checkout_button().click()
+
+    def press_city_field(self):
+        self.get_city_field().click()
+
+    def press_continue_button(self):
+        self.get_continue_button().click()
+
+    def press_delivery_cdek(self):
+        self.get_delivery_cdek().click()
+
+    def press_delivery_cash(self):
+        self.get_delivery_cash().click()
+
+    def click_field_name(self):
+        self.get_field_name().click()
+
+    def input_name_field(self, name):
+        self.get_field_name().send_keys(name)
+
+    def click_mail_field(self):
+        self.get_mail_field().click()
+
+    def input_mail_field(self, mail):
+        self.get_mail_field().send_keys(mail)
+
+    def click_address_field(self):
+        self.get_address_field().click()
+
+    def input_address_field(self, address):
+        self.get_address_field().send_keys(address)
+
+    def click_comment_field(self):
+        self.get_comment_order_field().click()
+
+    def input_comment_field(self, comment):
+        self.get_comment_order_field().send_keys(comment)
+
+    def press_checkbox_personal_info(self):
+        self.get_personal_info_checkbox().click()
+
+    def press_main_page_logo(self):
+        self.get_main_page_logo().click()
+
+    def press_clear_button(self):
+        self.get_clear_button().click()

@@ -75,3 +75,58 @@ class Treats_page(Base):
 
     def get_sausages_img(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.sausages_img))
+
+
+    def press_min_price_filter(self):
+        self.get_min_price_filter().click()
+
+    def input_min_price(self, value):
+        self.get_min_price_filter().send_keys(value)
+
+    def press_max_price_filter(self):
+        self.get_max_price_filter().click()
+
+    def input_max_price(self, value):
+        self.get_max_price_filter().send_keys(value)
+
+    def choose_feed_line(self):
+        self.get_feed_line().click()
+
+    def choose_dogs_age(self):
+        self.get_age_of_dogs().click()
+
+    def choose_dogs_size(self):
+        self.get_size_of_dog().click()
+
+    def choose_breeds_filter(self):
+        self.get_filter_breeds().click()
+
+    def choose_filter_ages(self):
+        self.get_filter_ages().click()
+
+    def choose_premium_feed(self):
+        self.get_premium_feed().click()
+
+    def choose_super_premium_feed(self):
+        self.get_super_premium_feed().click()
+
+    def choose_country_filter(self):
+        self.get_country_filter().click()
+
+    def canada_choose(self):
+        self.get_canada_country().click()
+
+    def russia_choose(self):
+        self.get_russia_country().click()
+
+    def japan_choose(self):
+        self.get_japan_country().click()
+
+    def china_choose(self):
+        self.get_china_country().click()
+
+    def press_show_button(self):
+        self.get_show_button().click()
+
+    def click_sausage_img(self):
+        self.get_sausages_img().click()
