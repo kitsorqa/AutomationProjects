@@ -1,8 +1,12 @@
+from someshop_ui.utilities.config_loader import load_config
+
 class Base:
-    def __init__(self, driver):
+    data_config = load_config()
+
+    def __init__(self, driver, mail=data_config['mail'], password=data_config['password']):
         self.driver = driver
-        self.mail = "Faker.faker@mail.ru"
-        self.password = "fakerfaker"
+        self.mail = mail
+        self.password = password
 
     def get_current_url(self):
         get_url = self.driver.current_url
