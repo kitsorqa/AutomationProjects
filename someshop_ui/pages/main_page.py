@@ -6,9 +6,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from ..base.base_class import Base
 
-class Main_page(Base):
-    def __init__(self, driver):
+class MainPage(Base):
+    def __init__(self, driver, url = "https://dogokot.ru/"):
         super().__init__(driver)
+        self.url = url
 
 
     #Locators at main page
@@ -22,47 +23,65 @@ class Main_page(Base):
     cart_button = "//a[@data-entity='basket-items-count']"
 
     def get_enter_button(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.enter_button))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.enter_button)))
 
     def get_login_field(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.login_field))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.login_field)))
 
     def get_password_field(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.password_field))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.password_field)))
 
     def get_enter_modal_form(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.enter_modal_form))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.enter_modal_form)))
 
     def get_remember_user(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.remember_user))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.remember_user)))
 
     def get_alert_login(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.login_alert))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.login_alert)))
 
     def get_catalog_button(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.catalog_button))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.catalog_button)))
 
     def get_cart_button(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.cart_button))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.cart_button)))
 
 
     def click_login_button(self):
         self.get_enter_button().click()
+        print("Press login button")
 
     def input_login(self):
-        self.get_login_field().click()
+        self.get_login_field().send_keys(self.mail)
+        print("Input login")
 
     def input_password(self):
-        self.get_password_field().click()
+        self.get_password_field().send_keys(self.password)
+        print("Input password")
 
     def press_login_button(self):
         self.get_enter_modal_form().click()
+        print("Press login button")
 
     def press_remember_user(self):
         self.get_remember_user().click()
+        print("Press remember user")
 
     def check_login_alert(self):
+        print("Check login alert")
         return self.get_alert_login().is_enabled()
 
     def press_catalog_button(self):
         self.get_catalog_button().click()
+        print("Press catalog button")
+
+    def authorization(self):
+        self.driver.get(self.url)
+        self.click_login_button()
+        self.input_login()
+        self.input_password()
+        self.press_remember_user()
+        self.press_login_button()
+        self.check_login_alert()
+        self.assert_title(self.get_current_title(), 'Личный кабинет')
+        self.press_catalog_button()

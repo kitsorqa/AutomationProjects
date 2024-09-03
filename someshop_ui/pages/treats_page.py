@@ -6,7 +6,7 @@ from selenium.webdriver.support.ui import WebDriverWait
 
 from ..base.base_class import Base
 
-class Treats_page(Base):
+class TreatsPage(Base):
     def __init__(self, driver):
         super().__init__(driver)
 
