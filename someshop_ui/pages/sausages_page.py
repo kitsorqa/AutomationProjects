@@ -21,40 +21,55 @@ class SausagesPage(Base):
     sorted_by = "(//div[contains(@class, 'dropdown-select__title')])"
     available_sort = "(//a[contains(@class, 'CATALOG_AVAILABLE')])"
     pet_goods = "//div[contains(@class, 'item_block')]"
-    cart_icon = "//span[contains(@class, 'dark_link')]/span[@class='count']"
+    cart_icon_count = "//span[contains(@class, 'dark_link')]/span[@class='count']"
+    all_products = "//div[contains(@class, 'display_list')]"
+    view_by_list = "//i[@title='списком']"
+    to_basket = "//span[contains(@class, 'to-cart')]"
 
     def get_max_price_filter(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.max_price_filter))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.max_price_filter)))
 
     def get_age_of_dogs(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.age_of_dogs))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.age_of_dogs)))
 
     def get_brands(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.brands))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.brands)))
 
     def get_villages_treats(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.villages_treats))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.villages_treats)))
 
     def get_clan_classic(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.clan_classic))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.clan_classic)))
 
     def get_stuzzy_friends(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.stuzzy_friends))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.stuzzy_friends)))
 
     def get_show_button(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.show_button))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.show_button)))
 
     def get_sorted_by(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.sorted_by))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.sorted_by)))
 
     def get_available_sort(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.available_sort))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.available_sort)))
 
     def get_pet_goods(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.pet_goods))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.pet_goods)))
 
     def get_cart_icon(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.cart_icon))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.cart_icon)))
+
+    def get_all_products_of_page(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.all_products)))
+
+    def get_view_by_list(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.view_by_list)))
+
+    def get_to_basket(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.to_basket)))
+
+    def get_cart_count(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.cart_icon_count)))
 
     def input_max_price_filter(self):
         self.get_max_price_filter().click()
@@ -77,6 +92,12 @@ class SausagesPage(Base):
     def press_stuzzy_friends(self):
         self.get_stuzzy_friends().click()
 
+    def choose_sausages_brands(self):
+        self.click_into_brands()
+        self.press_stuzzy_friends()
+        self.press_clan_classic()
+        self.click_villages_treats()
+
     def press_show_button(self):
         self.get_show_button().click()
 
@@ -91,3 +112,23 @@ class SausagesPage(Base):
 
     def press_cart_icon(self):
         self.get_cart_icon().click()
+
+    def press_view_by_list(self):
+        self.get_view_by_list().click()
+
+    def press_to_basket(self):
+        self.get_to_basket().click()
+
+
+
+    def filters_work(self):
+        self.send_max_price(999)
+        self.press_dogs_age()
+        self.choose_sausages_brands()
+        self.press_view_by_list()
+
+    def buy_3_products(self):
+        self.get_to_basket().click()
+        self.get_to_basket().click()
+        self.get_to_basket().click()
+        self.assert_count_of_locator(3, int(self.get_cart_count().text))

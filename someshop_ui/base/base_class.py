@@ -16,7 +16,7 @@ class Base:
         get_title = self.driver.title
         return get_title
 
-    def assert_word(self, word, result):
+    def assert_text(self, word, result):
         value_word = word.text
         assert result == value_word
 
@@ -28,8 +28,8 @@ class Base:
         page_title = self.get_current_title()
         assert page_title == needs_title
 
-    def assert_is_selected(self, locator, result):
-        assert locator == result
+    def assert_count_of_locator(self, value, real_count):
+        assert value == real_count
 
     def scroll_browser(self, x=0, y=0):
         self.x = x

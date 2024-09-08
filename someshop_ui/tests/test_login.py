@@ -26,4 +26,6 @@ def test_login_into_system():
     catalog_page_test = CalatogPage(driver)
     catalog_page_test.products_for_dogs()
 
+
+
     print("Finish test")

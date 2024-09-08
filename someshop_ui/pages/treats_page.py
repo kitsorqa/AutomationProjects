@@ -24,57 +24,61 @@ class TreatsPage(Base):
     canada_country = "//span[contains(text(), 'Канада')]"
     china_country = "//span[contains(text(), 'Китай')]"
     russia_country = "//span[contains(text(), 'Россия')]"
-    japan_country = "//span[contains(text(), 'Японий')]"
+    japan_country = "//span[contains(text(), 'Япония')]"
+    italy_country = "//span[contains(text(), 'Италия')]"
     show_button = "//input[@id='set_filter']"
     sausages_img = "//img[@title='Колбаски']"
 
     def get_min_price_filter(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.min_price_filter))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.min_price_filter)))
 
     def get_max_price_filter(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.max_price_filter))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.max_price_filter)))
 
     def get_feed_line(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.feed_line))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.feed_line)))
 
     def get_age_of_dogs(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.age_of_dogs))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.age_of_dogs)))
 
     def get_size_of_dog(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.size_of_dog))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.size_of_dog)))
 
     def get_filter_breeds(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.filter_breeds))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.filter_breeds)))
 
     def get_filter_ages(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.filter_ages))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.filter_ages)))
 
     def get_premium_feed(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.premium_feed))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.premium_feed)))
 
     def get_super_premium_feed(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.super_premium_feed))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.super_premium_feed)))
 
     def get_country_filter(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.country_filter))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.country_filter)))
 
     def get_canada_country(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.canada_country))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.canada_country)))
 
     def get_china_country(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.china_country))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.china_country)))
 
     def get_russia_country(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.russia_country))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.russia_country)))
 
     def get_japan_country(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.japan_country))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.japan_country)))
+
+    def get_italy_country(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.italy_country)))
 
     def get_show_button(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.show_button))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.show_button)))
 
     def get_sausages_img(self):
-        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable("xpath", self.sausages_img))
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.sausages_img)))
 
 
     def press_min_price_filter(self):
@@ -130,3 +134,23 @@ class TreatsPage(Base):
 
     def click_sausage_img(self):
         self.get_sausages_img().click()
+
+
+    def filters_work(self):
+        self.input_min_price(500)
+        self.input_max_price(750)
+        self.choose_dogs_size()
+        self.choose_breeds_filter()
+        self.choose_dogs_age()
+        self.choose_filter_ages()
+        self.choose_feed_line()
+        self.choose_premium_feed()
+        self.choose_super_premium_feed()
+        self.choose_country_filter()
+        self.japan_choose()
+        self.russia_choose()
+        self.china_choose()
+        self.canada_choose()
+        assert False is self.get_italy_country().is_selected()
+        self.press_show_button()
+        self.click_sausage_img()
