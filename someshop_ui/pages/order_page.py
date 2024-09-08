@@ -4,10 +4,10 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from faker import Faker
-from ..base.base_class import Base
-
+from someshop_ui.base.base_class import Base
 
 faker = Faker()
+
 
 class OrderPage(Base):
     def __init__(self, driver):
@@ -27,7 +27,6 @@ class OrderPage(Base):
     personal_info_checkbox = "//label[@class='license']"
     personal_info_error = "//label[@class='error']"
     main_page_logo = "//img[@title='Сайт по умолчанию']"
-
 
     def get_city_field(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.city_field)))
@@ -68,7 +67,6 @@ class OrderPage(Base):
     def get_main_page_logo(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.main_page_logo)))
 
-
     def press_city_field(self):
         self.get_city_field().click()
 
@@ -86,31 +84,36 @@ class OrderPage(Base):
 
     def input_name_field(self, name):
         self.get_field_name().send_keys(name)
+        print("Press name")
 
     def click_mail_field(self):
         self.get_mail_field().click()
 
     def input_mail_field(self, mail):
         self.get_mail_field().send_keys(mail)
+        print("input mail")
 
     def click_address_field(self):
         self.get_address_field().click()
 
     def input_address_field(self, address):
         self.get_address_field().send_keys(address)
+        print("Input address")
 
     def click_comment_field(self):
         self.get_comment_order_field().click()
 
     def input_comment_field(self, comment):
         self.get_comment_order_field().send_keys(comment)
+        print("Input comment")
 
     def press_checkbox_personal_info(self):
         self.get_personal_info_checkbox().click()
+        print("Press checkbox personal info")
 
     def press_main_page_logo(self):
         self.get_main_page_logo().click()
-
+        print("Press main page logo")
 
     def placing_order(self):
         self.press_city_field()
@@ -132,3 +135,4 @@ class OrderPage(Base):
         self.assert_text(self.get_phone_error_field().text, 'Поле "Телефон" обязательно для заполнения')
         self.press_checkbox_personal_info()
         self.press_main_page_logo()
+        print("placing order is over")

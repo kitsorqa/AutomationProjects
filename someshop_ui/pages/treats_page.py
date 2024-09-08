@@ -4,11 +4,13 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from ..base.base_class import Base
+from someshop_ui.base.base_class import Base
+
 
 class TreatsPage(Base):
     def __init__(self, driver):
         super().__init__(driver)
+        self.url_treats_page = "https://dogokot.ru/catalog/tovary_dlya_sobak/lakomstva/"
 
     # Locators at catalog page
     min_price_filter = "//input[@id='NEXT_SMART_FILTER_P1_MIN']"
@@ -80,63 +82,78 @@ class TreatsPage(Base):
     def get_sausages_img(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.sausages_img)))
 
-
     def press_min_price_filter(self):
         self.get_min_price_filter().click()
 
     def input_min_price(self, value):
         self.get_min_price_filter().send_keys(value)
+        print("Input min price")
 
     def press_max_price_filter(self):
         self.get_max_price_filter().click()
 
     def input_max_price(self, value):
         self.get_max_price_filter().send_keys(value)
+        print("Input max price")
 
     def choose_feed_line(self):
         self.get_feed_line().click()
+        print("Line of feed")
 
     def choose_dogs_age(self):
         self.get_age_of_dogs().click()
+        print("Dogs age")
 
     def choose_dogs_size(self):
         self.get_size_of_dog().click()
+        print("Dogs size")
 
     def choose_breeds_filter(self):
         self.get_filter_breeds().click()
+        print("Breeds filter")
 
     def choose_filter_ages(self):
         self.get_filter_ages().click()
+        print("Filter age")
 
     def choose_premium_feed(self):
         self.get_premium_feed().click()
+        print("Premium feed choose")
 
     def choose_super_premium_feed(self):
         self.get_super_premium_feed().click()
+        print("Super premium feed choose")
 
     def choose_country_filter(self):
         self.get_country_filter().click()
+        print("Country filter choose")
 
     def canada_choose(self):
         self.get_canada_country().click()
+        print("Canada choose")
 
     def russia_choose(self):
         self.get_russia_country().click()
+        print("Russia choose")
 
     def japan_choose(self):
         self.get_japan_country().click()
+        print("Japan choose")
 
     def china_choose(self):
         self.get_china_country().click()
+        print("China choose")
 
     def press_show_button(self):
         self.get_show_button().click()
+        print("Press show button")
 
     def click_sausage_img(self):
         self.get_sausages_img().click()
-
+        print("Click sausage img")
 
     def filters_work(self):
+        self.assert_url(self.url_treats_page)
         self.input_min_price(500)
         self.input_max_price(750)
         self.choose_dogs_size()
@@ -153,4 +170,6 @@ class TreatsPage(Base):
         self.canada_choose()
         assert False is self.get_italy_country().is_selected()
         self.press_show_button()
+        self.scroll_browser_to_up_page()
         self.click_sausage_img()
+        print("Filter work checked")

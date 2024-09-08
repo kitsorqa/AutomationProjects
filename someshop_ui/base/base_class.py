@@ -1,5 +1,6 @@
 from someshop_ui.utilities.config_loader import load_config
 
+
 class Base:
     data_config = load_config()
 
@@ -20,9 +21,9 @@ class Base:
         value_word = word.text
         assert result == value_word
 
-    def assert_url(self, url, result):
-        url = self.get_current_url()
-        assert url == result, "get invalid url"
+    def assert_url(self, result):
+        url_of_page = self.get_current_url()
+        assert url_of_page == result, "get invalid url"
 
     def assert_title(self, page_title, needs_title):
         page_title = self.get_current_title()
@@ -31,6 +32,10 @@ class Base:
     def assert_count_of_locator(self, value, real_count):
         assert value == real_count
 
-    def scroll_browser(self, x=0, y=0):
+    def scroll_browser_to_points(self, x=0, y=0):
         self.x = x
         self.y = y
+        self.driver.execute_script(f"window.scrollTo({self.x}, {self.y});")
+
+    def scroll_browser_to_up_page(self):
+        self.driver.execute_script("window.scrollTo(0, 0);")

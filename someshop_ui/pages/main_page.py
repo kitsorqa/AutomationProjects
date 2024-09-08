@@ -4,15 +4,15 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from ..base.base_class import Base
+from someshop_ui.base.base_class import Base
+
 
 class MainPage(Base):
-    def __init__(self, driver, url = "https://dogokot.ru/"):
+    def __init__(self, driver, url="https://dogokot.ru/"):
         super().__init__(driver)
         self.url = url
 
-
-    #Locators at main page
+    # Locators at main page
     enter_button = "//span[contains(text(), 'Войти')]"
     login_field = "//input[@id='USER_LOGIN_POPUP']"
     password_field = "//input[@id='USER_PASSWORD_POPUP']"
@@ -46,6 +46,9 @@ class MainPage(Base):
     def get_cart_button(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.cart_button)))
 
+    def press_cart_button(self):
+        self.get_cart_button().click()
+        print("Press cart button")
 
     def click_login_button(self):
         self.get_enter_button().click()

@@ -4,7 +4,7 @@ from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
-from ..base.base_class import Base
+from someshop_ui.base.base_class import Base
 
 
 class CalatogPage(Base):
@@ -19,8 +19,10 @@ class CalatogPage(Base):
 
     def click_treats_for_dogs(self):
         self.get_treats_for_dogs().click()
+        print("Click treats catalog")
 
     def products_for_dogs(self):
         self.get_treats_for_dogs().is_enabled()
         self.assert_title(self.get_current_title(), 'Каталог товаров - Dogokot')
         self.click_treats_for_dogs()
+        print("Open products for dog")
