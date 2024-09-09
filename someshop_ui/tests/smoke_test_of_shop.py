@@ -38,7 +38,7 @@ def test_login_into_system():
     cart_page_test.checking_cart_page()
 
     order_page_test = OrderPage(driver)
-    order_page_test.placing_order()
+    order_page_test.placing_order_modal_form()
 
     main_page_test.press_cart_button()
     cart_page_test.click_clear_cart_button()

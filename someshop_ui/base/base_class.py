@@ -19,7 +19,7 @@ class Base:
 
     def assert_text(self, word, result):
         value_word = word.text
-        assert result == value_word
+        assert result == value_word, 'The words are different'
 
     def assert_url(self, result):
         url_of_page = self.get_current_url()
@@ -32,6 +32,9 @@ class Base:
     def assert_count_of_locator(self, value, real_count):
         assert value == real_count
 
+    def assert_length_of_field(self, value, real_value):
+        assert value == real_value
+
     def scroll_browser_to_points(self, x=0, y=0):
         self.x = x
         self.y = y
@@ -39,3 +42,6 @@ class Base:
 
     def scroll_browser_to_up_page(self):
         self.driver.execute_script("window.scrollTo(0, 0);")
+
+    def switch_to_frame(self, iframe_locator):
+        self.driver.switch_to.frame(iframe_locator)

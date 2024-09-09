@@ -14,7 +14,7 @@ class OrderPage(Base):
         super().__init__(driver)
 
     # Locators at order page
-    city_field = "//input[@class='bx-ui-sls-fake']"
+    city_field = "(//a[contains(text(), 'Владивосток')])[2]"
     continue_button = "//a[contains(text(), 'Далее')]"
     delivery_cdek = "//div[contains(text(), 'СДЭК')]"
     delivery_cash = "//div[contains(text(), 'Наличные курьеру при получении товара')]"
@@ -27,9 +27,38 @@ class OrderPage(Base):
     personal_info_checkbox = "//label[@class='license']"
     personal_info_error = "//label[@class='error']"
     main_page_logo = "//img[@title='Сайт по умолчанию']"
+    phone_field_modal = "//input[@id='one_click_buy_id_PHONE']"
+    comment_field_modal = "//textarea[@id='one_click_buy_id_COMMENT']"
+    personal_info_modal = "//label[@class='license']"
+    complete_order_button = "//button[@id='one_click_buy_form_button']"
+    fio_field_modal = "//input[@id='one_click_buy_id_FIO']"
+    email_field_modal = "//input[@id='one_click_buy_id_EMAIL']"
+    complete_alert = "//div[contains(@class, 'one_click_buy_basket_frame')]"
+    frame_modal = "//div[contains(@class, 'one_click_buy_basket_frame')]"
 
     def get_city_field(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.city_field)))
+
+    def get_frame_modal(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.frame_modal)))
+
+    def get_complete_order_button(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.complete_order_button)))
+
+    def get_fio_field_modal(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.fio_field_modal)))
+
+    def get_email_field_modal(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.email_field_modal)))
+
+    def get_personal_info_modal(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.personal_info_modal)))
+
+    def get_comment_field_modal(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.comment_field_modal)))
+
+    def get_phone_field_modal(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.phone_field_modal)))
 
     def get_continue_button(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.continue_button)))
@@ -67,17 +96,24 @@ class OrderPage(Base):
     def get_main_page_logo(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.main_page_logo)))
 
+    def get_complete_order_alert(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.complete_alert)))
+
     def press_city_field(self):
         self.get_city_field().click()
+        print("Choose city")
 
     def press_continue_button(self):
         self.get_continue_button().click()
+        print("Press continue button")
 
     def press_delivery_cdek(self):
         self.get_delivery_cdek().click()
+        print("Choose cdek")
 
     def press_delivery_cash(self):
         self.get_delivery_cash().click()
+        print("Choose cash")
 
     def click_field_name(self):
         self.get_field_name().click()
@@ -96,12 +132,37 @@ class OrderPage(Base):
     def click_address_field(self):
         self.get_address_field().click()
 
+    def click_fio_field_modal(self):
+        self.get_fio_field_modal().click()
+        print("Click fio field")
+
+    def click_email_field_modal(self):
+        self.get_email_field_modal().click()
+        print("Click email field")
+
+    def clear_fio_field_modal(self):
+        self.get_fio_field_modal().clear()
+        print("Clear fio field")
+
+    def input_fio_field_modal(self):
+        self.get_fio_field_modal().send_keys(faker.name())
+        print("Input fio")
+
+    def clear_email_field_modal(self):
+        self.get_email_field_modal().clear()
+        print("Clear email field")
+
+    def input_email_field_modal(self, email="Faker.faker@mail.ru"):
+        self.get_email_field_modal().send_keys(email)
+        print("Input email")
+
     def input_address_field(self, address):
         self.get_address_field().send_keys(address)
         print("Input address")
 
     def click_comment_field(self):
         self.get_comment_order_field().click()
+        print("Click comment field")
 
     def input_comment_field(self, comment):
         self.get_comment_order_field().send_keys(comment)
@@ -114,6 +175,26 @@ class OrderPage(Base):
     def press_main_page_logo(self):
         self.get_main_page_logo().click()
         print("Press main page logo")
+
+    def press_order_button_modal(self):
+        self.get_complete_order_button().click()
+        print("Press order button")
+
+    def press_phone_modal(self):
+        self.get_phone_field_modal().click()
+        print("Press phone field")
+
+    def input_phone_modal(self, number="+78126607008"):
+        self.get_phone_field_modal().send_keys(number)
+        print("Input phone")
+
+    def input_comment_modal(self, text="Проверочные работы"):
+        self.get_comment_field_modal().send_keys(text)
+        print("Input comment")
+
+    def press_checkbox_info_modal(self):
+        self.get_personal_info_modal().click()
+        print("Press checkbox")
 
     def placing_order(self):
         self.press_city_field()
@@ -135,4 +216,20 @@ class OrderPage(Base):
         self.assert_text(self.get_phone_error_field().text, 'Поле "Телефон" обязательно для заполнения')
         self.press_checkbox_personal_info()
         self.press_main_page_logo()
+        print("placing order is over")
+
+    def placing_order_modal_form(self):
+        #self.switch_to_frame(self.get_frame_modal())
+        self.click_fio_field_modal()
+        self.clear_fio_field_modal()
+        self.input_fio_field_modal()
+        self.press_phone_modal()
+        self.input_phone_modal()
+        self.click_email_field_modal()
+        self.input_email_field_modal()
+        self.get_comment_field_modal()
+        self.input_comment_modal()
+        self.press_checkbox_personal_info()
+        self.press_order_button_modal()
+        self.get_complete_order_alert().is_displayed()
         print("placing order is over")

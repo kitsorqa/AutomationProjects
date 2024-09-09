@@ -158,4 +158,4 @@ class SausagesPage(Base):
         self.scroll_browser_to_up_page()
         self.press_buy_button()
         self.press_to_basket()
-        print("One product brought")
+        print("One product bought")
