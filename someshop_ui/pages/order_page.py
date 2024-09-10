@@ -12,6 +12,9 @@ faker = Faker()
 
 
 class OrderPage(CartPage, Base):
+    """
+    Класс содержит данные для заказа товара, локаторы и методы для заказа через полное оформление и быстрое
+    """
     def __init__(self, driver):
         super().__init__(driver)
 
@@ -262,4 +265,5 @@ class OrderPage(CartPage, Base):
         self.press_order_button_modal()
         self.alert_order_is_displayer()
         self.get_complete_order_alert().is_displayed()
+        self.click_get_close_modal()
         print("placing order is over")

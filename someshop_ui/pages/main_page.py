@@ -8,6 +8,9 @@ from someshop_ui.base.base_class import Base
 
 
 class MainPage(Base):
+    """
+    Класс основной страницы, используется для авторизации и перехода в каталог
+    """
     def __init__(self, driver, url="https://dogokot.ru/"):
         super().__init__(driver)
         self.url = url

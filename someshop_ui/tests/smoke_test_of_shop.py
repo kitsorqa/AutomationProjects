@@ -3,7 +3,7 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from someshop_ui.utilities.conftest import alert_about_test
 from someshop_ui.pages.cart_page import CartPage
-from someshop_ui.pages.catalog_page import CalatogPage
+from someshop_ui.pages.catalog_page import CatalogPage
 from someshop_ui.pages.main_page import MainPage
 from someshop_ui.pages.treats_page import TreatsPage
 from someshop_ui.pages.sausages_page import SausagesPage
@@ -11,6 +11,12 @@ from someshop_ui.pages.order_page import OrderPage
 
 
 def test_login_into_system():
+    """
+    Данный тест авторизуется в магазине по заранее зарегистрированному пользователю,
+    Открывает вкладку лакомств для собак, проверяет работу фильтров, имитация того, что покупатель не нашел по
+    соответствующим фильтрам товар и перешел в раздел колбасок, где оформил заказ
+    :return:
+    """
     options = webdriver.ChromeOptions()
     service = Service(ChromeDriverManager().install())
     options.add_argument('--window-size=1920,1080')
@@ -24,7 +30,7 @@ def test_login_into_system():
     main_page_test = MainPage(driver)
     main_page_test.authorization()
 
-    catalog_page_test = CalatogPage(driver)
+    catalog_page_test = CatalogPage(driver)
     catalog_page_test.products_for_dogs()
 
     treats_page_test = TreatsPage(driver)
@@ -40,8 +46,6 @@ def test_login_into_system():
     order_page_test = OrderPage(driver)
     order_page_test.placing_order_modal_form()
 
-    main_page_test.press_cart_button()
-    cart_page_test.click_clear_cart_button()
-    main_page_test.assert_text(cart_page_test.get_clear_cart_text().text, "Ваша корзина пуста")
+    main_page_test.assert_text(cart_page_test.get_clear_cart_text(), "Ваша корзина пуста")
 
     print("Finish test")

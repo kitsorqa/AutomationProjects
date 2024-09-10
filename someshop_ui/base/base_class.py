@@ -2,6 +2,11 @@ from someshop_ui.utilities.config_loader import load_config
 
 
 class Base:
+    """
+    Базовый класс, парсит данные из конфига для последующего использования данных для авторизации
+    Данные из json файла используются в методах, как параметры по умолчанию для добавляения большей гибкости
+    Так же добавлены стандартные методы из пайтона и селениума, но для большего удобства переиспользуются
+    """
     data_config = load_config()
 
     def __init__(self, driver, mail=data_config['mail'], password=data_config['password']):

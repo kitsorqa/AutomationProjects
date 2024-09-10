@@ -7,7 +7,10 @@ from selenium.webdriver.support.ui import WebDriverWait
 from someshop_ui.base.base_class import Base
 
 
-class CalatogPage(Base):
+class CatalogPage(Base):
+    """
+    Класс используется для работы с каталогом магазина, в данном случается переходит в товары для собак
+    """
     def __init__(self, driver):
         super().__init__(driver)
 

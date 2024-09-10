@@ -8,6 +8,10 @@ from someshop_ui.base.base_class import Base
 
 
 class TreatsPage(Base):
+    """
+    Класс реализует работу в каталоге на странице лакомств, где происходит имитация того, что потенциальный покупатель
+    ищет товары по фильтрам, ничего не находит и переходит в другой интересующий раздел
+    """
     def __init__(self, driver):
         super().__init__(driver)
         self.url_treats_page = "https://dogokot.ru/catalog/tovary_dlya_sobak/lakomstva/"

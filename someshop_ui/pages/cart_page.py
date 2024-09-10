@@ -11,6 +11,9 @@ from someshop_ui.base.base_class import Base
 
 
 class CartPage(Base):
+    """
+    Класс для работы на странице корзины, используется для вызова оформления заказа
+    """
     def __init__(self, driver):
         super().__init__(driver)
 

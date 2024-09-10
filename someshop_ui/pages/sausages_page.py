@@ -10,6 +10,10 @@ from someshop_ui.base.base_class import Base
 
 
 class SausagesPage(Base):
+    """
+    Класс для открытия страницы в каталоге с выбором колбасок для собак
+    Происходит работа с фильтрами, добавление первого доступного товара в корзину для последующего оформления заказа
+    """
     def __init__(self, driver):
         super().__init__(driver)
         self.url_sausage_page = "https://dogokot.ru/catalog/tovary_dlya_sobak/lakomstva/kolbaski/"
