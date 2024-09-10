@@ -3,13 +3,15 @@ from selenium.webdriver.chrome.service import Service
 from webdriver_manager.chrome import ChromeDriverManager
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.common.action_chains import ActionChains
 from faker import Faker
 from someshop_ui.base.base_class import Base
+from someshop_ui.pages.cart_page import CartPage
 
 faker = Faker()
 
 
-class OrderPage(Base):
+class OrderPage(CartPage, Base):
     def __init__(self, driver):
         super().__init__(driver)
 
@@ -35,9 +37,13 @@ class OrderPage(Base):
     email_field_modal = "//input[@id='one_click_buy_id_EMAIL']"
     complete_alert = "//div[contains(@class, 'one_click_buy_basket_frame')]"
     frame_modal = "//div[contains(@class, 'one_click_buy_basket_frame')]"
+    close_modal = "//a[contains(@class, 'jqmClose ')]"
 
     def get_city_field(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.city_field)))
+
+    def get_close_modal(self):
+        return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.close_modal)))
 
     def get_frame_modal(self):
         return WebDriverWait(self.driver, 30).until(EC.element_to_be_clickable(("xpath", self.frame_modal)))
@@ -184,7 +190,7 @@ class OrderPage(Base):
         self.get_phone_field_modal().click()
         print("Press phone field")
 
-    def input_phone_modal(self, number="+78126607008"):
+    def input_phone_modal(self, number="8126607008"):
         self.get_phone_field_modal().send_keys(number)
         print("Input phone")
 
@@ -193,8 +199,30 @@ class OrderPage(Base):
         print("Input comment")
 
     def press_checkbox_info_modal(self):
-        self.get_personal_info_modal().click()
+        actions = ActionChains(self.driver)
+        actions.move_to_element(self.get_personal_info_modal()).move_by_offset(-100, 0).click().perform()
         print("Press checkbox")
+
+    def alert_order_is_displayer(self):
+        if self.get_complete_order_alert().is_displayed():
+            self.click_get_close_modal()
+            self.press_fast_order_button()
+            self.click_fio_field_modal()
+            self.clear_fio_field_modal()
+            self.input_fio_field_modal()
+            self.press_phone_modal()
+            self.input_phone_modal()
+            self.click_email_field_modal()
+            self.clear_email_field_modal()
+            self.input_email_field_modal()
+            self.get_comment_field_modal()
+            self.input_comment_modal()
+            self.press_checkbox_info_modal()
+            self.press_order_button_modal()
+
+
+    def click_get_close_modal(self):
+        self.get_close_modal().click()
 
     def placing_order(self):
         self.press_city_field()
@@ -226,10 +254,12 @@ class OrderPage(Base):
         self.press_phone_modal()
         self.input_phone_modal()
         self.click_email_field_modal()
+        self.clear_email_field_modal()
         self.input_email_field_modal()
         self.get_comment_field_modal()
         self.input_comment_modal()
-        self.press_checkbox_personal_info()
+        self.press_checkbox_info_modal()
         self.press_order_button_modal()
+        self.alert_order_is_displayer()
         self.get_complete_order_alert().is_displayed()
         print("placing order is over")
